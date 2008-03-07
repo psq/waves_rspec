@@ -1,0 +1,9 @@
+History.txt
+License.txt
+Manifest.txt
+README.txt
+Rakefile
+lib/waves-rspec.rb
+lib/waves-rspec/tasks.rb
+lib/waves-rspec/version.rb
+tasks/waves-rpsec.rake
