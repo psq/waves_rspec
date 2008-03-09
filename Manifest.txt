@@ -3,6 +3,8 @@ License.txt
 Manifest.txt
 README.txt
 Rakefile
+generators/rspec/templates/spec.opts
+generators/rspec/templates/spec_helper.rb
 lib/waves-rspec.rb
 lib/waves-rspec/tasks.rb
 lib/waves-rspec/version.rb

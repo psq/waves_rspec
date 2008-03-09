@@ -4,7 +4,7 @@ require 'rubygems'
 require 'hoe'
 require './lib/waves-rspec.rb'
 
-Hoe.new('WavesRspec', WavesRspec::VERSION::STRING) do |p|
+Hoe.new('waves-rspec', WavesRspec::VERSION::STRING) do |p|
   p.rubyforge_name = 'waves-rspec'
   p.author = 'Pascal Belloncle (nano RAILS)'
   p.email = 'psq@nanorails.com'
