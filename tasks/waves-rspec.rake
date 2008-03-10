@@ -25,8 +25,8 @@ end
 namespace :generate do
   desc 'Generate everything needed to use RSpec'
   task :rspec do |task|
+    templates = File.expand_path(File.dirname(__FILE__) / '..' / 'generators' / 'rspec' / 'templates')
     chdir Waves::Configurations::Default.root do
-      templates = File.dirname(__FILE__) / '..' / 'generators' / 'rspec' / 'templates'
       generate_dir("spec")
       generate_file(templates / 'spec.opts', 'spec' / 'spec.opts')
       generate_file(templates / 'spec_helper.rb', 'spec' / 'spec_helper.rb')
