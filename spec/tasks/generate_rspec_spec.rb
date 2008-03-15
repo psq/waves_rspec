@@ -31,9 +31,9 @@ describe_rake_task "generate:rspec", "tasks/waves-rspec.rake" do
   end
 
   it "should output the creation messages" do
-    should_receive(:puts).with("spec created") do
-      should_receive(:puts).with("spec/spec.opts created") do
-        should_receive(:puts).with("spec/spec_helper.rb created")
+    should_receive(:puts).with("** spec created") do
+      should_receive(:puts).with("** spec/spec.opts created") do
+        should_receive(:puts).with("** spec/spec_helper.rb created")
       end
     end
     invoke!
@@ -43,9 +43,9 @@ describe_rake_task "generate:rspec", "tasks/waves-rspec.rake" do
     FileUtils.mkdir_p(@app / 'spec')
     FileUtils.touch(@app / 'spec' / 'spec.opts')
     FileUtils.touch(@app / 'spec' / 'spec_helper.rb')
-    should_receive(:puts).with("spec exists") do
-      should_receive(:puts).with("spec/spec.opts exists") do
-        should_receive(:puts).with("spec/spec_helper.rb exists")
+    should_receive(:puts).with("** spec exists") do
+      should_receive(:puts).with("** spec/spec.opts exists") do
+        should_receive(:puts).with("** spec/spec_helper.rb exists")
       end
     end
     invoke!

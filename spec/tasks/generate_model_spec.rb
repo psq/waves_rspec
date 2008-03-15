@@ -8,7 +8,7 @@ describe_rake_task "generate:model", "tasks/waves-rspec.rake" do
   before(:each) do
     @app = tmppath(:app)
     FileUtils.mkdir_p(@app)
-    ENV['model'] = 'my_model'
+    ENV['name'] = 'my_model'
     Waves::Configurations::Default.stub!(:root).and_return(@app)
     Waves.stub!(:application).and_return(MyTestApp)
   end
@@ -23,10 +23,10 @@ describe_rake_task "generate:model", "tasks/waves-rspec.rake" do
     File.exist?(@app / 'spec' / 'models').should == true
   end
     
-  it "should create spec/model/my_model.rb file" do
+  it "should create spec/model/my_model_spec.rb file" do
     stub!(:puts)
     invoke!
-    File.exist?(@app / 'spec' / 'models' / "#{ENV['model']}.rb").should == true
+    File.exist?(@app / 'spec' / 'models' / "#{ENV['name']}_spec.rb").should == true
   end
     
 end
