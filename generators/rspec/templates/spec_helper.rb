@@ -8,7 +8,7 @@ ENV["mode"] = "test"
 require 'rubygems'
 require 'waves'
 require 'spec'
-Waves::Console.load
+Waves::Console.load(:mode => ENV['mode'])
 
 require File.join(File.dirname(__FILE__), "..", "configurations", "test")
 
