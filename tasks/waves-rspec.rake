@@ -35,19 +35,37 @@ namespace :generate do
 
   desc 'Generate a new model'
   task :model do |task|
-    
+    templates = File.expand_path(File.dirname(__FILE__) / '..' / 'generators' / 'rspec_model' / 'templates')
+    chdir Waves::Configurations::Default.root do
+      dir = 'spec' / 'models'
+      generate_dir(dir)
+
+      name = Waves.application.to_s
+      model = ENV['model'].camel_case
+      File.write(dir / "#{ENV['model']}.rb",
+        Erubis::Eruby.new(File.read(templates / 'model_spec.rb.erb')).result(binding))
+    end
   end
 
   desc 'Generate a new controller'
   task :controller do |task|
-    
+    templates = File.expand_path(File.dirname(__FILE__) / '..' / 'generators' / 'rspec_controller' / 'templates')
+    chdir Waves::Configurations::Default.root do
+      dir = 'spec' / 'controllers'
+      generate_dir(dir)
+
+      name = Waves.application.to_s
+      controller = ENV['controller'].camel_case
+      File.write(dir / "#{ENV['controller']}.rb",
+        Erubis::Eruby.new(File.read(templates / 'controller_spec.rb.erb')).result(binding))
+    end
   end
 
   def generate_dir(dir, force=false)
     if File.exist?(dir) && !force
       puts("#{dir} exists")
     else
-      FileUtils.mkdir_p("spec")
+      FileUtils.mkdir_p(dir)
       puts("#{dir} created")
     end
   end

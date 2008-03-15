@@ -45,7 +45,6 @@ def describe_rake_task(task_name, filename, &block)
 
     def cleanup
       path = File.expand_path(File.join(File.dirname(__FILE__), "tmp"))
-      logger.debug {"Removing #{path.inspect}"}
       FileUtils.rm_rf(path)
     end
 

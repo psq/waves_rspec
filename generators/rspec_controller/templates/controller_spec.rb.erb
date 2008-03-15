@@ -1,0 +1,9 @@
+require File.dirname(__FILE__) + '/spec_helper'
+
+describe "testing spec" do
+
+  it "should work" do
+    M = [<%= name %>]::Controllers
+    M::[<%= controller %>].all.size.should == 0
+  end
+end
