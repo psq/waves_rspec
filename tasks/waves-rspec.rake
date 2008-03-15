@@ -41,9 +41,10 @@ namespace :generate do
       generate_dir(dir)
 
       name = Waves.application.to_s
-      model = ENV['model'].camel_case
-      File.write(dir / "#{ENV['model']}.rb",
-        Erubis::Eruby.new(File.read(templates / 'model_spec.rb.erb')).result(binding))
+      model = ENV['name'].camel_case
+      generate_file('', dir / "#{ENV['name']}_spec.rb") do
+        Erubis::Eruby.new(File.read(templates / 'model_spec.rb.erb')).result(binding)
+      end
     end
   end
 
@@ -55,27 +56,32 @@ namespace :generate do
       generate_dir(dir)
 
       name = Waves.application.to_s
-      controller = ENV['controller'].camel_case
-      File.write(dir / "#{ENV['controller']}.rb",
-        Erubis::Eruby.new(File.read(templates / 'controller_spec.rb.erb')).result(binding))
+      controller = ENV['name'].camel_case
+      generate_file('', dir / "#{ENV['name']}_spec.rb") do
+        Erubis::Eruby.new(File.read(templates / 'controller_spec.rb.erb')).result(binding)
+      end
     end
   end
 
   def generate_dir(dir, force=false)
     if File.exist?(dir) && !force
-      puts("#{dir} exists")
+      puts("** #{dir} exists")
     else
       FileUtils.mkdir_p(dir)
-      puts("#{dir} created")
+      puts("** #{dir} created")
     end
   end
   
-  def generate_file(source, dest, force = false)
+  def generate_file(source, dest, force = false, &block)
     if File.exist?(dest) && !force
-      puts("#{dest} exists")
+      puts("** #{dest} exists")
     else
-      FileUtils.cp(source, dest)
-      puts("#{dest} created")
+      if block_given?
+        File.write(dest, yield)
+      else
+        FileUtils.cp(source, dest)
+      end
+      puts("** #{dest} created")
     end
   end
 
