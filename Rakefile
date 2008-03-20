@@ -16,7 +16,7 @@ end
 # vim: syntax=Ruby
 
 desc "Install to gems dir of waves_app=/path/to/app"
-task :install_local do
+task :install_local => :gem do
   require 'rubygems/installer'
   app_gems_path = File.join(ENV['waves_app'], 'gems')
   Dir['pkg/*.gem'].each do |gem|
