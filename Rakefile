@@ -14,3 +14,13 @@ Hoe.new('waves-rspec', WavesRspec::VERSION::STRING) do |p|
 end
 
 # vim: syntax=Ruby
+
+desc "Install to gems dir of waves_app=/path/to/app"
+task :install_local do
+  require 'rubygems/installer'
+  app_gems_path = File.join(ENV['waves_app'], 'gems')
+  Dir['pkg/*.gem'].each do |gem|
+    puts "Installing #{gem} to #{app_gems_path}"
+    Gem::Installer.new(gem, :install_dir => app_gems_path).install
+  end
+end
